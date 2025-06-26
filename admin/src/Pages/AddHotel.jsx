@@ -1,43 +1,50 @@
 import React from "react";
 import { useState } from "react";
-import {api} from "../API/api.js";
-import {toast , ToastContainer} from "react-toastify"
+import { api } from "../API/api.js";
+import { toast, ToastContainer } from "react-toastify";
 
 const AddHotel = () => {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
-  const [taxcleardocument, setTaxClearDocument] = useState("");
+  const [price, setPrice] = useState("");
+  const [image, setImage] = useState(null);
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-
+    if (!name || !location || !description ||!price || !image) {
+      toast.error("Please add all the fields");
+      return;
+    }
     try {
-      await api.post("/hotel/addhotel",{
-        name,location,description,taxcleardocument
-      });
-      toast.success("Hotel Added Successfully")
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("location", location);
+      formData.append("description", description);
+      formData.append("price", price);
+      formData.append("image", image);
 
+      await api.post("/hotel/addhotel", formData, {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      });
+      toast.success("Hotel Added Successfully");
+
+      setName("");
+      setLocation("");
+      setDescription("");
+      setImage(null);
     } catch (error) {
       console.log(error);
 
-  // Agar backend ne response diya ho error ke sath
-  if (error.response && error.response.data) {
-    // Try to get meaningful error message
-    const errMsg =
-      error.response.data.error || error.response.data.message || "Unknown error";
-    toast.error(errMsg);
-  } else {
-    // Network error ya koi aur
-    toast.error("Error while adding Hotel");
-  }
-
+      toast.error("Error while adding Hotel");
     }
   };
 
   return (
     <form onSubmit={handlesubmit}>
-      <ToastContainer/>
+      <ToastContainer />
       <div className="flex items-center md:justify-center p-2  bg-gray-900 h-[calc(100vh-72px)]">
         {/* LEFT CONTAINER */}
 
@@ -67,13 +74,22 @@ const AddHotel = () => {
             placeholder="Enter Hotel Description"
             className=" text-white p-2 rounded-md bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400"
           />
+<label className="text-green-400 font-semibold">Location</label>
+          <input
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            type="text"
+            placeholder="Enter Price per Night"
+            className=" text-white p-2 rounded-md bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400"
+          />
+
           <label className="text-green-400 font-semibold">
-            Tax clear document
+            Add Hotel Pic
           </label>
           <input
-            value={taxcleardocument}
-            onChange={(e) => setTaxClearDocument(e.target.value)}
-            type="text"
+            accept="image/*"
+            onChange={(e) => setImage(e.target.files[0])}
+            type="file"
             placeholder="Enter Hotel tax clear document"
             className=" text-white p-2 rounded-md bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400"
           />

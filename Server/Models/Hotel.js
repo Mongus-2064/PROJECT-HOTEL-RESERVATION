@@ -13,7 +13,11 @@ const hotelschema = mongoose.Schema({
         type: String,
         required: true,
     },
-    taxcleardocument :{
+    price:{
+        type: String,
+        required:true,
+    },
+    image :{
         type: String,
         required: true,
     },

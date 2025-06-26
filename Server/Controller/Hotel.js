@@ -2,8 +2,9 @@ import Hotel from "../Models/Hotel.js";
 
 export const adminaddhotel = async (req, res) => {
   try {
-    const { name, location, description, taxcleardocument } = req.body;
-    if (!name || !location || !description || !taxcleardocument) {
+    const { name, location, description, price } = req.body;
+    const image = req.file.filename
+    if (!name || !location || !description || !image ||!price) {
       return res
         .status(400)
         .json({ msg: "Please fill out all the information" });
@@ -18,7 +19,8 @@ export const adminaddhotel = async (req, res) => {
       name,
       location,
       description,
-      taxcleardocument,
+      price,
+      image,
     });
     return res.status(200).json({ msg: "Hotel registered Successfully!" });
   } catch (error) {

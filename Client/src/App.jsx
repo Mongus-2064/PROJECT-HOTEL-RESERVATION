@@ -8,8 +8,7 @@ import Home from "./pages/Main/Home";
 import About from "./pages/Main/About";
 import Contact from "./pages/Main/Contact";
 import Hotels from "./pages/Main/Hotels";
-import Protectedroutes from "./ProtectedRoutes/Protectedroutes";
-
+import Protectedroutes from "./ProtectedRoutes/Protectedroute.jsx"
 const App = () => {
   return (
     <>
@@ -21,9 +20,30 @@ const App = () => {
 
         <Route element={<Mainlayout />}>
           <Route path="" element={<Home />} />
-          <Route path="/About" element={<Protectedroutes><About /></Protectedroutes>} />
-          <Route path="/Contact" element={<Protectedroutes><Contact /></Protectedroutes>} />
-          <Route path="/Hotels" element={<Protectedroutes><Hotels /></Protectedroutes> }/>
+          <Route
+            path="/About"
+            element={
+              <Protectedroutes>
+                <About />
+              </Protectedroutes>
+            }
+          />
+          <Route
+            path="/Contact"
+            element={
+              <Protectedroutes>
+                <Contact />
+              </Protectedroutes>
+            }
+          />
+          <Route
+            path="/Hotels"
+            element={
+              <Protectedroutes>
+                <Hotels />
+              </Protectedroutes>
+            }
+          />
         </Route>
       </Routes>
     </>

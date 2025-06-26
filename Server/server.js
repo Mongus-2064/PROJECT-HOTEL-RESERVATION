@@ -19,6 +19,7 @@ server.use(cors({
 server.use("/auth",Authroute);
 server.use("/hotel",Hotelroute)
 server.use("/user",Bookingroute)
+server.use("/Uploads",express.static("Uploads"));
 
 const PORT = process.env.PORT;
 server.listen(PORT, () => {
