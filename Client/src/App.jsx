@@ -8,7 +8,8 @@ import Home from "./pages/Main/Home";
 import About from "./pages/Main/About";
 import Contact from "./pages/Main/Contact";
 import Hotels from "./pages/Main/Hotels";
-import Protectedroutes from "./ProtectedRoutes/Protectedroute.jsx"
+import Protectedroutes from "./ProtectedRoutes/Protectedroute.jsx";
+import Hoteldetails from "./pages/Main/Hoteldetails.jsx";
 const App = () => {
   return (
     <>
@@ -25,6 +26,14 @@ const App = () => {
             element={
               <Protectedroutes>
                 <About />
+              </Protectedroutes>
+            }
+          />
+          <Route
+            path="/details/:id"
+            element={
+              <Protectedroutes>
+                <Hoteldetails />
               </Protectedroutes>
             }
           />

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "..//..//API/api.js";
+import { Link } from "react-router-dom";
 
 const Hotels = () => {
   const [hotels, setHotels] = useState([]);
@@ -21,7 +22,8 @@ const Hotels = () => {
     <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 bg-gray-900 p-2 ">
       {Array.isArray(hotels) &&
         hotels?.map((h, i) => (
-          <div
+          <Link to={`/details/${h._id}`}>
+           <div
             key={h._id}
             className="bg-gray-700 text-white rounded-xl shadow-lg p-6 w-full max-w-sm mx-auto hover:shadow-2xl  mb-4 hover:cursor-pointer"
           >
@@ -44,6 +46,8 @@ const Hotels = () => {
               </button>
             </div>
           </div>
+          </Link>
+         
         ))}
     </div>
   );
