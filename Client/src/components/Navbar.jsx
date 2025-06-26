@@ -1,13 +1,25 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaHouseChimney, FaHotel } from "react-icons/fa6";
 import { IoIosInformationCircle, IoMdContact } from "react-icons/io";
 import { FaRegUser, FaUserPlus } from "react-icons/fa";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
 
 const Navbar = () => {
+  const token = localStorage.getItem("token")
+  const email = localStorage.getItem("emails")
   const [selectedtab, setSelectedTab] = useState("");
   const [isopen, setIsOpen] = useState(false);
+  const navigate = useNavigate()
+
+  const handlelogout = ()=>{
+      localStorage.removeItem("token");
+   localStorage.removeItem("emails")
+
+      navigate("/login")
+
+  }
+
   return (
     <div>
       <div className="bg-gray-900 px-4 py-2 flex  items-center justify-between border-b border-white">
@@ -81,7 +93,27 @@ const Navbar = () => {
             Contact
           </Link>
         </div>
-        <div className="text-white custom:flex gap-3 hidden">
+
+
+
+
+
+        {token ? <div className="text-white custom:flex gap-3 hidden">
+          <p
+            
+            className="flex items-center gap-2 border border-transparent p-2 transition-colors duration-150 rounded-md hover:border-green-400 hover:text-green-400"
+          >
+            <FaRegUser width={19} />
+            {email}
+          </p>
+          <p
+          onClick={handlelogout}
+            className="flex items-center gap-2 border p-2 rounded-md transition-colors duration-150border-green-400 text-green-400 hover:text-white hover:cursor-pointer"
+          >
+            <FaUserPlus width={19} />
+            Logout
+          </p>
+        </div> : <div className="text-white custom:flex gap-3 hidden">
           <Link
             to={"/login"}
             className="flex items-center gap-2 border border-transparent p-2 transition-colors duration-150 rounded-md hover:border-green-400 hover:text-green-400"
@@ -96,7 +128,7 @@ const Navbar = () => {
             <FaUserPlus width={19} />
             SignUp
           </Link>
-        </div>
+        </div>}
       </div>
       {/* MENU ICONS FOR MOBILE */}
       {isopen && (
@@ -152,22 +184,38 @@ const Navbar = () => {
               Contact
             </Link>
           </div>
-          <div className="text-white custom:hidden flex gap-5 py-3 bg-gray-900 flex-col  items-center ">
-            <Link
-              to={"/login"}
-              className="flex items-center gap-2 border p-2 rounded-md hover:border-green-400 hover:text-green-400"
-            >
-              <FaRegUser width={19} />
-              Login
-            </Link>
-            <Link
-              to={"/signup"}
-              className="flex items-center gap-2 border p-2 rounded-md hover:border-green-400 hover:text-green-400"
-            >
-              <FaUserPlus width={19} />
-              SignUp
-            </Link>
-          </div>
+         {token ? (
+            <div className="text-white custom:hidden flex gap-5 py-3 bg-gray-900 flex-col  items-center ">
+              <p className="flex items-center gap-2 border p-2 rounded-md hover:border-green-400 hover:text-green-400">
+                <FaRegUser width={19} />
+                {email}
+              </p>
+              <p
+                onClick={handlelogout}
+                className="flex items-center gap-2 border p-2 rounded-md hover:border-green-400 hover:text-green-400"
+              >
+                <FaUserPlus width={19} />
+                Logout
+              </p>
+            </div>
+          ) : (
+            <div className="text-white custom:hidden flex gap-5 py-3 bg-gray-900 flex-col  items-center ">
+              <Link
+                to={"/login"}
+                className="flex items-center gap-2 border p-2 rounded-md hover:border-green-400 hover:text-green-400"
+              >
+                <FaRegUser width={19} />
+                Login
+              </Link>
+              <Link
+                to={"/signup"}
+                className="flex items-center gap-2 border p-2 rounded-md hover:border-green-400 hover:text-green-400"
+              >
+                <FaUserPlus width={19} />
+                SignUp
+              </Link>
+            </div>
+          )}
         </div>
       )}
     </div>

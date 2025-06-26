@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import Loader from "../../Loaders/Loader.jsx"
 import api from "..//..//API/api.js";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [loading , setLoading] = useState(false);
 
   const handlesubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
 
     try {
       const res = await api.post("/auth/login", {
@@ -24,8 +27,12 @@ const Login = () => {
     } catch (error) {
       toast.error("Error while logging in");
       console.log(error);
+    }finally{
+      setLoading(false)
     }
   };
+
+  if (loading) return <Loader/>
 
   return (
     <form onSubmit={handlesubmit}>
