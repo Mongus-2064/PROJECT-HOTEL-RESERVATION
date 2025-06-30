@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../API/api";
+import BookingForm from "./BookingForm";
 
 const HotelDetails = () => {
   const { id } = useParams();
@@ -18,14 +19,15 @@ const HotelDetails = () => {
     fetchData();
   }, [id]);
 
-  if (!hotel) return <div className="text-white text-center mt-10">Loading...</div>;
+  if (!hotel)
+    return <div className="text-white text-center mt-10">Loading...</div>;
 
   return (
     <div className="bg-gray-950 min-h-screen text-white">
       {/* Hero Image */}
       <div className="relative">
         <img
-        loading="lazy"
+          loading="lazy"
           src={`http://localhost:7000/Uploads/${hotel.image}`}
           alt={hotel.name}
           className="w-full h-[400px] object-cover brightness-75"
@@ -75,6 +77,7 @@ const HotelDetails = () => {
           </button>
         </div>
       </div>
+      <BookingForm selectedhotel={hotel} />
     </div>
   );
 };

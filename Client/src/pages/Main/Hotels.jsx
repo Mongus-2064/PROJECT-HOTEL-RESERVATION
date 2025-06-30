@@ -3,7 +3,7 @@ import api from "..//..//API/api.js";
 import { Link } from "react-router-dom";
 
 const Hotels = () => {
-  const [hotels, setHotels] = useState([]);
+  const [hotel, setHotels] = useState([]);
   const photoUrl = "http://localhost:7000/Uploads";
 
   useEffect(() => {
@@ -11,7 +11,7 @@ const Hotels = () => {
       try {
         const res = await api.get("/hotel/gethotels");
         console.log(res.data);
-        setHotels(res.data.Hotles);
+        setHotels(res.data.hotels);
       } catch (error) {
         console.log(error);
       }
@@ -20,8 +20,8 @@ const Hotels = () => {
   }, []);
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 bg-gray-900 p-2 ">
-      {Array.isArray(hotels) &&
-        hotels?.map((h, i) => (
+      {Array.isArray(hotel) &&
+        hotel?.map((h, i) => (
           <Link to={`/details/${h._id}`}>
            <div
             key={h._id}

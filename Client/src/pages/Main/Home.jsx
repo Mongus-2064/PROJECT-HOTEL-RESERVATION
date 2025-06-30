@@ -2,9 +2,24 @@ import React from "react";
 import { FaArrowCircleRight } from "react-icons/fa";
 import FeaturedHotels from "../../API/Hotel.jsx";
 import {useNavigate} from "react-router-dom";
+import { useState } from "react";
 
 const Home = () => {
+  const [selectedtab , setSelectedTab] = useState(false)
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
+const handletoken = ()=>{
+
+  if(token)
+  {
+    navigate("/Hotels");
+    setSelectedTab("Home")
+  }
+  navigate("/login")
+
+}
+
   return (
     <div>
       <div className="h-[calc(100vh-59px)] bg-gray-900 flex md:py-0 py-2  items-center flex-col px-4 overflow-y-scroll ">
@@ -30,8 +45,8 @@ const Home = () => {
         {/* START YOUR JOURNEY TODAY BUTTON */}
         <div className="mt-3 w-full flex justify-center">
           <button 
-          onClick={()=> navigate("/login")}
-          className="  rounded-sm font-semibold p-2 text-xl bg-green-400 hover:cursor-pointer hover:scale-105 border border-transparent mt-4 w-[90%] md:w-[80%] hover:rounded-md transition-all hover:bg-transparent hover:text-white hover:border-green-400">
+          onClick={handletoken}
+          className={`rounded-sm font-semibold p-2 text-xl bg-green-400 hover:cursor-pointer hover:scale-105 border border-transparent mt-4 w-[90%] md:w-[80%] hover:rounded-md transition-all hover:bg-transparent hover:text-white hover:border-green-400`}>
             <span className="flex items-center justify-center gap-1">
               Start Your Journey <FaArrowCircleRight />
             </span>
