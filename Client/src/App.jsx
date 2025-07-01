@@ -12,6 +12,7 @@ import Protectedroutes from "./ProtectedRoutes/Protectedroute.jsx";
 import Hoteldetails from "./pages/Main/Hoteldetails.jsx";
 import Bookingform from "./pages/Main/BookingForm.jsx";
 import Success from "./pages/Main/Success.jsx";
+import Mybookings from "./pages/Main/Mybookings.jsx";
 
 const App = () => {
   return (
@@ -69,6 +70,15 @@ const App = () => {
             element={
               <Protectedroutes>
                 <Success />
+              </Protectedroutes>
+            }
+          />
+
+          <Route
+            path="/Mybookings"
+            element={
+              <Protectedroutes>
+                <Mybookings />
               </Protectedroutes>
             }
           />
