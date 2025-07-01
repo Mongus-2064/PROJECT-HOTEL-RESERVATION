@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../API/api";
 import BookingForm from "./BookingForm";
+import { useNavigate } from "react-router-dom";
 
 const HotelDetails = () => {
   const { id } = useParams();
   const [hotel, setHotel] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,14 +72,12 @@ const HotelDetails = () => {
           <span className="text-green-400 font-bold text-2xl">
             Rs. {hotel.price} / night
           </span>
-          <button className="bg-green-500 text-white font-semibold py-3 px-10 rounded w-full hover:scale-105 hover:transition-transform hover:cursor-pointer hover:text-green-400  hover:bg-gray-900 duration-300 ">
+          <button
+            onClick={() => navigate(`/booking/${hotel._id}`)}
+            className="bg-green-500 text-white font-semibold py-3 px-10 rounded w-full hover:scale-105 hover:transition-transform hover:cursor-pointer hover:text-green-400  hover:bg-gray-900 duration-300 "
+          >
             Book Now
           </button>
-        </div>
-
-        {/* Booking Form */}
-        <div className="mt-10">
-          <BookingForm selectedhotel={hotel} />
         </div>
       </div>
     </div>

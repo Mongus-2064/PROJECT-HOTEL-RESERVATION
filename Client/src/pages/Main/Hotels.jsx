@@ -23,31 +23,30 @@ const Hotels = () => {
       {Array.isArray(hotel) &&
         hotel?.map((h, i) => (
           <Link to={`/details/${h._id}`}>
-           <div
-            key={h._id}
-            className="bg-gray-700 text-white rounded-xl shadow-lg p-6 w-full max-w-sm mx-auto hover:shadow-2xl  mb-4 hover:cursor-pointer"
-          >
-            <img
-              src={`${photoUrl}/${h.image}`}
-              alt={h.name}
-              className="rounded-lg w-full h-48 object-cover mb-4 hover:scale-105 transition-transform"
-            />
-            <h2 className="text-xl font-bold mb-1">{h.name}</h2>
-            <p className="text-sm mb-1 text-white">📍 {h.location}</p>
-            <p className="text-white text-sm mb-2 line-clamp-2">
-              {h.description}
-            </p>
-            <div className="flex justify-between items-center">
-              <span className="font-semibold text-green-400">
-                Rs. {h.price} / night
-              </span>
-              <button className="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700 transition text-sm">
-                Book Now
-              </button>
+            <div
+              key={i}
+              className="bg-gray-700 text-white rounded-xl shadow-lg p-6 w-full max-w-sm mx-auto hover:shadow-2xl  mb-4 hover:cursor-pointer"
+            >
+              <img
+                src={`${photoUrl}/${h.image}`}
+                alt={h.name}
+                className="rounded-lg w-full h-48 object-cover mb-4 hover:scale-105 transition-transform"
+              />
+              <h2 className="text-xl font-bold mb-1">{h.name}</h2>
+              <p className="text-sm mb-1 text-white">📍 {h.location}</p>
+              <p className="text-white text-sm mb-2 line-clamp-2">
+                {h.description}
+              </p>
+              <div className="flex justify-between items-center">
+                <span className="font-semibold text-green-400">
+                  Rs. {h.price} / night
+                </span>
+                <button className="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700 transition text-sm">
+                  Book Now
+                </button>
+              </div>
             </div>
-          </div>
           </Link>
-         
         ))}
     </div>
   );

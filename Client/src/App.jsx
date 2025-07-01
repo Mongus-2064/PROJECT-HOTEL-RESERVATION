@@ -11,6 +11,7 @@ import Hotels from "./pages/Main/Hotels";
 import Protectedroutes from "./ProtectedRoutes/Protectedroute.jsx";
 import Hoteldetails from "./pages/Main/Hoteldetails.jsx";
 import Bookingform from "./pages/Main/BookingForm.jsx";
+import Success from "./pages/Main/Success.jsx";
 
 const App = () => {
   return (
@@ -56,10 +57,18 @@ const App = () => {
             }
           />
           <Route
-            path="/booking"
+            path="/booking/:id"
             element={
               <Protectedroutes>
                 <Bookingform />
+              </Protectedroutes>
+            }
+          />
+          <Route
+            path="/success"
+            element={
+              <Protectedroutes>
+                <Success />
               </Protectedroutes>
             }
           />
