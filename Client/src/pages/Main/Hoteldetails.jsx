@@ -39,45 +39,47 @@ const HotelDetails = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto mt-10 p-4 grid md:grid-cols-3 gap-10">
-        {/* Hotel Info */}
-        <div className="md:col-span-2 space-y-6">
-          <h2 className="text-2xl font-semibold border-b border-gray-700 pb-2">
-            Hotel Details
-          </h2>
-          <p className="text-gray-300">{hotel.description}</p>
+      <div className="max-w-6xl mx-auto mt-10 p-4">
+        {/* Description and Why Choose Us side by side */}
+        <div className="flex flex-col md:flex-row gap-8">
+          {/* Description */}
+          <div className="md:flex-1">
+            <h2 className="text-2xl font-semibold border-b border-gray-700 pb-2">
+              Hotel Details
+            </h2>
+            <p className="text-gray-300 mt-4">{hotel.description}</p>
+          </div>
 
-          <div className="flex items-center gap-4 mt-4">
-            <span className="text-green-400 font-bold text-xl">
-              Rs. {hotel.price} / night
-            </span>
+          {/* Why Choose Us */}
+          <div className="md:flex-1 bg-gray-800 p-6 rounded-lg shadow-lg text-white">
+            <h3 className="text-xl font-semibold mb-4 border-b border-green-400 pb-2">
+              Why Choose Us?
+            </h3>
+            <ul className="list-disc list-inside space-y-2 text-gray-300">
+              <li>Best location in town</li>
+              <li>Affordable prices</li>
+              <li>24/7 customer support</li>
+              <li>Clean and comfortable rooms</li>
+              <li>Easy booking process</li>
+            </ul>
           </div>
         </div>
 
-        {/* Booking Card */}
-        <div className="bg-gray-800/60 p-6 rounded-xl shadow-lg backdrop-blur-md border border-gray-700 space-y-4">
-          <h3 className="text-xl font-semibold mb-4">Book This Hotel</h3>
-
-          <input
-            type="date"
-            className="w-full p-2 bg-gray-900 rounded text-white border border-gray-600 focus:outline-none"
-          />
-          <input
-            type="date"
-            className="w-full p-2 bg-gray-900 rounded text-white border border-gray-600 focus:outline-none"
-          />
-          <input
-            type="number"
-            min={1}
-            defaultValue={1}
-            className="w-full p-2 bg-gray-900 rounded text-white border border-gray-600 focus:outline-none"
-          />
-          <button className="w-full py-2 rounded bg-green-600 hover:bg-green-700 transition">
+        {/* Price and Book Now button below */}
+        <div className="flex flex-col items-center mt-10 space-y-4">
+          <span className="text-green-400 font-bold text-2xl">
+            Rs. {hotel.price} / night
+          </span>
+          <button className="bg-green-500 text-white font-semibold py-3 px-10 rounded w-full hover:scale-105 hover:transition-transform hover:cursor-pointer hover:text-green-400  hover:bg-gray-900 duration-300 ">
             Book Now
           </button>
         </div>
+
+        {/* Booking Form */}
+        <div className="mt-10">
+          <BookingForm selectedhotel={hotel} />
+        </div>
       </div>
-      <BookingForm selectedhotel={hotel} />
     </div>
   );
 };
